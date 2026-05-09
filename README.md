@@ -107,23 +107,6 @@ The application implements end-to-end encryption for sensitive student data to e
 - This is a demonstration; in a real-world application, implement proper key management, use HTTPS, and follow security best practices.
 - Data is decrypted only on the client for display.
 
-## API Endpoints
-
-- `POST /api/register` - Create a new student
-- `GET /api/students` - Retrieve all students
-- `PUT /api/student/:id` - Update a student by ID
-- `DELETE /api/student/:id` - Delete a student by ID
-- `POST /api/login` - User login
-- `POST /api/signup` - User registration
-- `GET /api/courses` - Get list of available courses
-
-## Contributing
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Make your changes.
-4. Submit a pull request.
-
 ## License
 
 This project is for educational purposes.
