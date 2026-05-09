@@ -1,0 +1,83 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f5f5f5;
+}
+
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Avenir Next", "Segoe UI", sans-serif;
+  --color-ink-950: #132238;
+  --color-ink-800: #23415c;
+  --color-ink-700: #355b78;
+  --color-sand-50: #fffdf8;
+  --color-sand-100: #f7efe1;
+  --color-sand-200: #e7d7be;
+  --color-coral-400: #ee7b62;
+  --color-coral-500: #df654d;
+  --color-mint-300: #9fd7c0;
+  --color-mint-400: #71b89a;
+  --shadow-panel: 0 24px 80px rgba(19, 34, 56, 0.14);
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-sans);
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background:
+      radial-gradient(circle at top left, rgba(238, 123, 98, 0.18), transparent 28%),
+      radial-gradient(circle at top right, rgba(113, 184, 154, 0.2), transparent 24%),
+      linear-gradient(180deg, #fffdf8 0%, #f9f4ea 48%, #fffaf2 100%);
+    color: #132238;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  ::selection {
+    background: rgba(223, 101, 77, 0.18);
+    color: #132238;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply rounded-[30px] border border-white/70 bg-white/80 shadow-[var(--shadow-panel)] backdrop-blur;
+  }
+
+  .field {
+    @apply w-full rounded-2xl border border-sand-200 bg-sand-50/80 px-4 py-3 text-sm text-ink-950 outline-none transition duration-200 placeholder:text-ink-700/55 focus:border-coral-400 focus:bg-white focus:ring-4 focus:ring-coral-400/10;
+  }
+
+  .label {
+    @apply mb-2 block text-xs font-semibold uppercase tracking-[0.24em] text-ink-700;
+  }
+
+  .primary-button {
+    @apply inline-flex items-center justify-center rounded-full bg-ink-950 px-5 py-3 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-coral-500 focus:outline-none focus:ring-4 focus:ring-coral-400/20;
+  }
+
+  .secondary-button {
+    @apply inline-flex items-center justify-center rounded-full border border-ink-950/12 bg-white/70 px-4 py-2.5 text-sm font-semibold text-ink-950 transition duration-200 hover:-translate-y-0.5 hover:border-coral-400 hover:text-coral-500 focus:outline-none focus:ring-4 focus:ring-coral-400/10;
+  }
+}
+
+#root {
+  min-height: 100vh;
+}
