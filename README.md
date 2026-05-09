@@ -107,16 +107,6 @@ The application implements end-to-end encryption for sensitive student data to e
 - This is a demonstration; in a real-world application, implement proper key management, use HTTPS, and follow security best practices.
 - Data is decrypted only on the client for display.
 
-## Screenshots
-
-*(Optional: Add sample screenshots here to showcase the UI)*
-
-- Login Page
-- Student Form
-- Student List
-
-To add screenshots, place image files in the `client/public/screenshots/` directory and reference them here.
-
 ## API Endpoints
 
 - `POST /api/register` - Create a new student
