@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import {
   FiEye,
   FiEyeOff,
@@ -48,11 +49,13 @@ const LoginForm = ({ onAuthenticated }: Props) => {
     e.preventDefault();
 
     if (!EMAIL_REGEX.test(email)) {
+      toast.error("Email format is not match");
       setAuthMessage("Invalid email address.");
       return;
     }
 
     if (password.length < 6) {
+      toast.error("Password is wrong");
       setAuthMessage(
         "Password must be at least 6 characters."
       );
@@ -65,12 +68,14 @@ const LoginForm = ({ onAuthenticated }: Props) => {
 
     if (authMode === "signup") {
       if (!fullName.trim()) {
+        toast.error("Full Name is required");
         setAuthMessage("Enter your full name.");
         setIsSubmitting(false);
         return;
       }
 
       if (password !== confirmPassword) {
+        toast.error("Passwords do not match.");
         setAuthMessage("Passwords do not match.");
         setIsSubmitting(false);
         return;
@@ -83,17 +88,20 @@ const LoginForm = ({ onAuthenticated }: Props) => {
           password,
         });
 
+        toast.success("Account created successfully");
         onAuthenticated();
       } catch (error: any) {
         const responseCode =
           error?.response?.data?.code;
 
         if (responseCode === "USER_EXISTS") {
+          toast.error("This account already exists. Please login.");
           setAuthMode("login");
           setAuthMessage(
             "This account already exists. Please login."
           );
         } else {
+          toast.error(error?.response?.data?.message || "Could not create account.");
           setAuthMessage(
             error?.response?.data?.message ||
               "Could not create account."
@@ -112,12 +120,14 @@ const LoginForm = ({ onAuthenticated }: Props) => {
         password,
       });
 
+      toast.success("Logged in successfully");
       onAuthenticated();
     } catch (error: any) {
       const responseCode =
         error?.response?.data?.code;
 
       if (responseCode === "USER_NOT_FOUND") {
+        toast.error("No account exists for that email.");
         setAuthMode("signup");
         setFullName("");
         setConfirmPassword(password);
@@ -125,6 +135,7 @@ const LoginForm = ({ onAuthenticated }: Props) => {
           "No account exists for that email. Create one to continue."
         );
       } else {
+        toast.error("Password is wrong");
         setAuthMessage(
           error?.response?.data?.message ||
             "Unable to sign in."

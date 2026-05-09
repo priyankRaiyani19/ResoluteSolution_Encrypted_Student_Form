@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import {
   FiEye,
   FiEyeOff,
@@ -144,10 +145,12 @@ const StudentForm = ({
     });
 
     if (missingField) {
-      alert(
-        `${missingField[1]} is required`
-      );
+      toast.error(`${missingField[1]} is required`);
+      return;
+    }
 
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      toast.error("Email format is not match");
       return;
     }
 
@@ -157,10 +160,7 @@ const StudentForm = ({
       );
 
     if (!/^\d{10}$/.test(phoneAsText)) {
-      alert(
-        "Phone number must be exactly 10 digits"
-      );
-
+      toast.error("Enter valid mobile number");
       return;
     }
 
@@ -180,9 +180,7 @@ const StudentForm = ({
           }
         );
 
-        alert(
-          "Student Updated"
-        );
+        toast.success("Student Updated");
       } else {
         await axios.post(
           API_ENDPOINTS.register,
@@ -191,9 +189,7 @@ const StudentForm = ({
           }
         );
 
-        alert(
-          "Student Created"
-        );
+        toast.success("Student Created");
       }
 
       fetchStudents();
@@ -202,7 +198,7 @@ const StudentForm = ({
     } catch (error) {
       console.log(error);
 
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 
